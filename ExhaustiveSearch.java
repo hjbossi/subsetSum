@@ -1,38 +1,40 @@
-// Hannah Bossi 
+// Hannah Bossi, Sara Hoffman, Riley Karp
 // CS 375 Project 4 
 // ExhaustiveSearch.java
 // Solves the Subset Sum Problem using exhaustive search 
 import java.lang.Math; 
 import java.util.ArrayList;
-import java.lang.Boolean;  
+import java.lang.Boolean; 
+import java.lang.Long;  
+import java.util.Random; 
 
 class ExhaustiveSearch{
 
 	// stores the set of numbers
-	private ArrayList<Integer> set; 
+	private ArrayList<Long> set; 
 	//stores the sum to search for
-	private int n; 
+	private long n; 
 	
 	
 	// takes in a set and a sum to search for
-	public ExhaustiveSearch(ArrayList<Integer> array, int num){
+	public ExhaustiveSearch(ArrayList<Long> array, long num){
 		this.set = array; 
 		this.n = num; 
 	}
 	
 	// return the set
-	public ArrayList<Integer> getSet(){
+	public ArrayList<Long> getSet(){
 		return this.set; 
 	
 	}
 
 	// generate the power set of the given set
 	// output: set of  2^n elements
-	public ArrayList<ArrayList<Integer>> getPowerSet(ArrayList<Integer> set){
+	public ArrayList<ArrayList<Long>> getPowerSet(ArrayList<Long> set){
 		int length = set.size(); 
-		ArrayList<ArrayList<Integer>> powerSet = new ArrayList<ArrayList<Integer>>(); 
+		ArrayList<ArrayList<Long>> powerSet = new ArrayList<ArrayList<Long>>(); 
 		for(int i = 0; i < (1<<length); i++){
-			ArrayList<Integer> subSet = new ArrayList<Integer>(); 
+			ArrayList<Long> subSet = new ArrayList<Long>(); 
 			for(int k = 0; k < length; k++){
 				if ((i & (1<<k)) > 0){
 					subSet.add(set.get(k)); 					
@@ -46,36 +48,39 @@ class ExhaustiveSearch{
 	
 	// perform the subset sum calculation
 	// do this by looping through the power set
-	public Boolean subSetSum(ArrayList<ArrayList<Integer>> powerSet){
+	public ArrayList<Long> subSetSum(ArrayList<ArrayList<Long>> powerSet){
 		int size = powerSet.size(); 
 		for(int i=0;i<size;i++){
-			ArrayList<Integer> subNums = powerSet.get(i);
+			ArrayList<Long> subNums = powerSet.get(i);
 			int subSize = subNums.size(); 
-			int sum = 0; 
+			long sum = 0; 
 			for(int k=0;k<subSize;k++){
 				sum += subNums.get(k); 		
 			}
 			if(sum == this.n){
-				return true; 
+				return subNums; 
 			}
 			sum = 0; 
 		
 		}
-		return false; 
+		return null; 
 	
 	
 	}	
 	
 	// ------------------------- MAIN CODE ---------------------------------------
 	public static void main (String args[]){
-		ArrayList<Integer> list = new ArrayList<Integer>(); 
-		list.add(1);
-		list.add(2);
-		list.add(3);
-		list.add(9);
-		int n = 8; 
-		ExhaustiveSearch s = new ExhaustiveSearch(list, n); 
-		ArrayList<ArrayList<Integer>> a = s.getPowerSet(s.getSet()); 
+		ArrayList<Long> list = new ArrayList<Long>(); 
+		Random random = new Random(); 
+		long LOWER_RANGE = 0;
+		long UPPER_RANGE = 1_000_000_000_000L;
+		for (int i = 0; i < 10; i++) {
+			long randomValue = LOWER_RANGE + (long)(random.nextDouble()*(UPPER_RANGE-LOWER_RANGE));
+			list.add(randomValue);
+		}
+		long target = 25_000_000_000_000L; 
+		ExhaustiveSearch s = new ExhaustiveSearch(list, target); 
+		ArrayList<ArrayList<Long>> a = s.getPowerSet(s.getSet()); 
 		System.out.println(s.subSetSum(a)); 
 	
 	
