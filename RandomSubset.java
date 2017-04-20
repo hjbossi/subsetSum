@@ -9,13 +9,13 @@ import java.lang.Math;
 
 // class definition
 public class RandomSubset {
-	private ArrayList<Integer> set;
-	private int target;
+	private ArrayList<Long> set;
+	private long target;
 	private int reps;
-	private int residue;
+	private long residue;
 
 	// constructor
-	public RandomSubset(ArrayList<Integer> s, int t, int r) {
+	public RandomSubset(ArrayList<Long> s, long t, int r) {
 		this.set = s;
 		this.target = t;
 		this.reps = r;
@@ -26,12 +26,12 @@ public class RandomSubset {
 	// input: subset
 	//.output: residue
 	// desc: finds total of subset and sets residue
-	private int findResidue(ArrayList<Integer> subset) {
+	private long findResidue(ArrayList<Long> subset) {
 		int total = 0;
-		for (Integer i : subset) {
+		for (Long i : subset) {
 			total += i;
 		}
-		int res = Math.abs(total - this.target);
+		long res = Math.abs(total - this.target);
 		if (res < this.residue) {
 			this.residue = res;
 		}
@@ -42,11 +42,13 @@ public class RandomSubset {
 	// input: null
 	//.output: subset
 	// desc: finds random subset of set
-	private ArrayList<Integer> genSubset() {
-		ArrayList<Integer> sub = new ArrayList<Integer>();
+	private ArrayList<Long> genSubset() {
+		ArrayList<Long> sub = new ArrayList<Long>();
+
 		Random r = new Random();
 		int numItems = r.nextInt(this.set.size());
 		System.out.println("Num items: "+numItems);
+
 		for (int i = 0; i < numItems; i++) {
 			int index = r.nextInt(this.set.size());
 			while (sub.contains(this.set.get(index))) {
@@ -63,8 +65,8 @@ public class RandomSubset {
 	// desc: executes subset process
 	private void findSets() {
 		for (int i = 0; i < this.reps; i++) {
-			ArrayList<Integer> subSet = this.genSubset();
-			int nextRes = this.findResidue(subSet);
+			ArrayList<Long> subSet = this.genSubset();
+			long nextRes = this.findResidue(subSet);
 			System.out.println("Subset: " + subSet);
 			System.out.println("Residue: "+ nextRes);
 		}
@@ -74,17 +76,25 @@ public class RandomSubset {
 
 	//------------------------- MAIN CODE ---------------------------------------
 	public static void main (String args[]){
-		ArrayList<Integer> set = new ArrayList<Integer>();
-		set.add(1);
-		set.add(2);
-		set.add(3);
-		set.add(9);
-		int repetitions = 8;
-		int target = 4;
-		RandomSubset s = new RandomSubset(set, target, repetitions);
+		Random r = new Random();
+		
+		ArrayList<Long> set = new ArrayList<Long>();
+
+		long LOWER_RANGE = 0;
+		long UPPER_RANGE = 1_000_000_000_000L;
+
+		for (int i = 0; i < 100; i++) {
+			long randomValue = LOWER_RANGE + (long)(r.nextDouble()*(UPPER_RANGE-LOWER_RANGE));
+			set.add(randomValue);
+		}
+
+		long target = (long) 25 * (long) Math.pow(10,12);
+		int reps = 100;
+
+		RandomSubset s = new RandomSubset(set, target, reps);
 		System.out.println("Set: " + set);
 		System.out.println("Target: " + target);
+
 		s.findSets();
-		// System.out.println(s.subSetSum(a)); 
 	}
 }

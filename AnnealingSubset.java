@@ -11,33 +11,33 @@ import java.util.Collections;
 
 // class definition
 public class AnnealingSubset {
-	private ArrayList<Integer> set;
-	private ArrayList<Integer> currentSub;
+	private ArrayList<Long> set;
+	private ArrayList<Long> currentSub;
 	private long target;
 	private int reps;
-	private int residue;
-	private int minRes;
+	private long residue;
+	private long minRes;
 
 	// constructor
-	public AnnealingSubset(ArrayList<Integer> s, long t, int r) {
+	public AnnealingSubset(ArrayList<Long> s, long t, int r) {
 		this.set = s;
 		this.target = t;
 		this.reps = r;
-		this.residue = Integer.MAX_VALUE;
-		this.minRes = Integer.MAX_VALUE;
-		this.currentSub = new ArrayList<Integer>();
+		this.residue = (long)Integer.MAX_VALUE;
+		this.minRes = (long)Integer.MAX_VALUE;
+		this.currentSub = new ArrayList<Long>();
 	}
 
 	// function: findResidue
 	// input: subset
 	//.output: residue
 	// desc: finds total of subset and sets residue
-	private int findResidue(ArrayList<Integer> subset) {
-		int total = 0;
-		for (Integer i : subset) {
+	private long findResidue(ArrayList<Long> subset) {
+		long total = 0;
+		for (Long i : subset) {
 			total += i;
 		}
-		int res = Math.abs(total - (int) this.target);
+		long res = Math.abs(total - this.target);
 		if (res < this.residue) {
 			this.residue = res;
 		}
@@ -48,8 +48,8 @@ public class AnnealingSubset {
 	// input: null
 	//.output: subset
 	// desc: finds random subset of set
-	private ArrayList<Integer> genSubset() {
-		ArrayList<Integer> sub = new ArrayList<Integer>();
+	private ArrayList<Long> genSubset() {
+		ArrayList<Long> sub = new ArrayList<Long>();
 		Random r = new Random();
 		int numItems = r.nextInt(this.set.size());
 		System.out.println("Num items: "+numItems);
@@ -69,7 +69,7 @@ public class AnnealingSubset {
 	// desc: finds neighbor subset
 	// and updates current subset
 	private void findNeighbor(int curIteration) {
-		ArrayList<Integer> t = (ArrayList<Integer>) this.currentSub.clone();
+		ArrayList<Long> t = (ArrayList<Long>) this.currentSub.clone();
 
 		Random r = new Random();
 		int i = r.nextInt(this.set.size());
@@ -92,8 +92,8 @@ public class AnnealingSubset {
 			}
 		}
 
-		int cRes = this.findResidue(this.currentSub);
-		int nRes = this.findResidue(t);
+		long cRes = this.findResidue(this.currentSub);
+		long nRes = this.findResidue(t);
 
 		// System.out.println("Current subset: "+this.currentSub);
 		// System.out.println("Neighbor subset: "+t);
@@ -109,7 +109,8 @@ public class AnnealingSubset {
 			System.out.println("---Swapped---");
 		} else {
 			//swap with probability e^-T
-			double a = -1 * ( (nRes - cRes) / (10000000000L * Math.pow(0.8, ( (double) curIteration/300.0) ) ) );
+			double curIt_Double = (double) curIteration;
+			double a = -1 * ( (nRes - cRes) / (10000000000L * Math.pow(0.8, ( (double) (curIt_Double/300.0) ) ) ) );
 			double power = Math.exp(a);
 			System.out.println("-T: "+a);
 			System.out.println("e^-T: "+power);
@@ -144,9 +145,12 @@ public class AnnealingSubset {
 	//------------------------- MAIN CODE ---------------------------------------
 	public static void main (String args[]){
 		Random r = new Random();
-		ArrayList<Integer> set = new ArrayList<Integer>();
+		ArrayList<Long> set = new ArrayList<Long>();
+		long LOWER_RANGE = 0;
+		long UPPER_RANGE = 1000000000000L;
 		for (int i = 0; i < 100; i++) {
-			set.add(r.nextInt(1000000000));
+			long randomValue = LOWER_RANGE + (long)(r.nextDouble()*(UPPER_RANGE-LOWER_RANGE));
+			set.add(randomValue);
 		}
 
 		long target = (long) 25 * (long) Math.pow(10,12);

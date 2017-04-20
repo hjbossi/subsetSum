@@ -11,31 +11,31 @@ import java.util.Collections;
 
 // class definition
 public class HillSubset {
-	private ArrayList<Integer> set;
-	private ArrayList<Integer> currentSub;
-	private int target;
+	private ArrayList<Long> set;
+	private ArrayList<Long> currentSub;
+	private long target;
+	private long residue;
 	private int reps;
-	private int residue;
 
 	// constructor
-	public HillSubset(ArrayList<Integer> s, int t, int r) {
+	public HillSubset(ArrayList<Long> s, long t, int r) {
 		this.set = s;
 		this.target = t;
 		this.reps = r;
-		this.residue = Integer.MAX_VALUE;
-		this.currentSub = new ArrayList<Integer>();
+		this.residue = (long) Integer.MAX_VALUE;
+		this.currentSub = new ArrayList<Long>();
 	}
 
 	// function: findResidue
 	// input: subset
 	//.output: residue
 	// desc: finds total of subset and sets residue
-	private int findResidue(ArrayList<Integer> subset) {
-		int total = 0;
-		for (Integer i : subset) {
+	private int findResidue(ArrayList<Long> subset) {
+		long total = 0;
+		for (long i : subset) {
 			total += i;
 		}
-		int res = Math.abs(total - this.target);
+		long res = Math.abs(total - this.target);
 		if (res < this.residue) {
 			this.residue = res;
 		}
@@ -46,8 +46,8 @@ public class HillSubset {
 	// input: null
 	//.output: subset
 	// desc: finds random subset of set
-	private ArrayList<Integer> genSubset() {
-		ArrayList<Integer> sub = new ArrayList<Integer>();
+	private ArrayList<Long> genSubset() {
+		ArrayList<Long> sub = new ArrayList<Long>();
 		Random r = new Random();
 		int numItems = r.nextInt(this.set.size());
 		System.out.println("Num items: "+numItems);
@@ -67,7 +67,7 @@ public class HillSubset {
 	// desc: finds neighbor subset
 	// and updates current subset
 	private void findNeighbor() {
-		ArrayList<Integer> t = (ArrayList<Integer>) this.currentSub.clone();
+		ArrayList<Long> t = (ArrayList<Long>) this.currentSub.clone();
 
 		Random r = new Random();
 		int i = r.nextInt(this.set.size());
@@ -79,24 +79,20 @@ public class HillSubset {
 			t.add(this.set.get(i));
 		}
 
-
-		float f = r.nextFloat();
+		double d = r.nextDouble();
 		if (this.currentSub.contains(this.set.get(j))) {
-			if (f < 0.5) {
+			if (d < 0.5) {
 				t.remove(this.set.get(j));
 			} 
 		} else {
-			if (f < 0.5) {
+			if (d < 0.5) {
 				t.add(this.set.get(j));
 			}
 		}
 
-		System.out.println("Current subset: "+this.currentSub);
-		System.out.println("Neighbor subset: "+t);
-		int cRes = this.findResidue(this.currentSub);
-		System.out.println("Current residue: "+cRes);
-		int nRes = this.findResidue(t);
-		System.out.println("Neighbor residue: "+nRes);
+		long cRes = this.findResidue(this.currentSub);
+		long nRes = this.findResidue(t);
+
 		if (nRes < cRes) {
 			this.currentSub = t;
 			System.out.println("---Swapped---");
@@ -109,10 +105,8 @@ public class HillSubset {
 	// desc: executes subset process
 	private void findSets() {
 		Collections.sort(this.set);
-		System.out.println("Sorted set: "+this.set);
 
 		this.currentSub = this.genSubset();
-		System.out.println("Current subset: "+this.currentSub);
 
 		for (int i = 0; i < this.reps; i++) {
 			this.findNeighbor();
@@ -125,20 +119,22 @@ public class HillSubset {
 
 	//------------------------- MAIN CODE ---------------------------------------
 	public static void main (String args[]){
-		ArrayList<Integer> set = new ArrayList<Integer>();
-		set.add(1);
-		set.add(2);
-		set.add(9);
-		set.add(3);
+		Random r = new Random();
+		
+		ArrayList<Long> set = new ArrayList<Long>();
 
-		int target = 4;
-		int reps = 8;
+		long LOWER_RANGE = 0;
+		long UPPER_RANGE = 1000000000000L;
+
+		for (int i = 0; i < 100; i++) {
+			long randomValue = LOWER_RANGE + (long)(r.nextDouble()*(UPPER_RANGE-LOWER_RANGE));
+			set.add(randomValue);
+		}
+
+		long target = (long) 25 * (long) Math.pow(10,12);
+		int reps = 100;
 
 		HillSubset s = new HillSubset(set, target, reps);
-
-		System.out.println("Set: " + set);
-		System.out.println("Target: " + target);
-		System.out.println("Reps: " + reps);
 
 		s.findSets();
 	}
