@@ -145,9 +145,12 @@ public class AnnealingSubset {
 	//------------------------- MAIN CODE ---------------------------------------
 	public static void main (String args[]){
 		Random r = new Random();
+
 		ArrayList<Long> set = new ArrayList<Long>();
+
 		long LOWER_RANGE = 0;
 		long UPPER_RANGE = 1000000000000L;
+		
 		for (int i = 0; i < 100; i++) {
 			long randomValue = LOWER_RANGE + (long)(r.nextDouble()*(UPPER_RANGE-LOWER_RANGE));
 			set.add(randomValue);
