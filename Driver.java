@@ -33,7 +33,7 @@ public class Driver {
         System.out.println( "---------------------Exhaustive--------------------");
         long startTime = System.nanoTime();
         ArrayList<ArrayList<Long>> a = exhaustive.getPowerSet(exhaustive.getSet()); 
-        boolean output = exhaustive.subSetSum(a);
+        ArrayList<Long> output = exhaustive.subSetSum(a);
         long endTime = System.nanoTime();
         System.out.println( output ); 
         long exhaustiveTime = (endTime - startTime) / 1000000;
