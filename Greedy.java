@@ -15,7 +15,7 @@ class Greedy{
 	// stores the set of numbers
 	private ArrayList<Long> set; 
 	//stores the sum to search for
-	private int n; 
+	private long n; 
 	
 	
 	// takes in a set and a sum to search for
