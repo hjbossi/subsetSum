@@ -23,7 +23,7 @@ public class Driver {
     
     	//make SubsetSum finders
         ExhaustiveSearch exhaustive = new ExhaustiveSearch( S,k );
-//        	SubsetSumDynamic dynamic = new SubsetSumDynamic( S,k );
+       	DynamicSubset dynamic = new DynamicSubset( S,k );
         Greedy greedy = new Greedy( S,k );
         RandomSubset random = new RandomSubset( S, k, reps );
         AnnealingSubset annealing = new AnnealingSubset( S, k, reps );
@@ -38,15 +38,15 @@ public class Driver {
         System.out.println( output ); 
         long exhaustiveTime = (endTime - startTime) / 1000000;
         
-//         dynamic
-//         System.out.println( "---------------------Dynamic--------------------");
-//         startTime = System.nanoTime();
-//         output = dynamic.subSetSum();
-//         endTime = System.nanoTime();
-//         System.out.println( output );
-//         long time = (endTime - startTime) / 1000000;
-//         output the speedup
-//         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
+        //dynamic
+        System.out.println( "---------------------Dynamic--------------------");
+        startTime = System.nanoTime();
+        output = dynamic.subSetSum();
+        endTime = System.nanoTime();
+        System.out.println( output );
+        long time = (endTime - startTime) / 1000000;
+        //output the speedup
+        System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
         
         
         //greedy
@@ -55,7 +55,7 @@ public class Driver {
         output = greedy.subsetSum();
         endTime = System.nanoTime();
         System.out.println( output );
-        long time = (endTime - startTime) / 1000000;
+        time = (endTime - startTime) / 1000000;
         // output the speedup
         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
         
