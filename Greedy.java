@@ -15,7 +15,7 @@ class Greedy{
 	// stores the set of numbers
 	private ArrayList<Long> set; 
 	//stores the sum to search for
-	private long n; 
+	private int n; 
 	
 	
 	// takes in a set and a sum to search for
@@ -31,7 +31,7 @@ class Greedy{
 	}
 	
 	// this is the algorithm to conduct the greedy algorithm
-	public ArrayList<Long> subsetSum(){
+	public long subsetSum(){
 		// create an empty subset s
 		ArrayList<Long> sub = new ArrayList<Long>();
 		 
@@ -51,15 +51,9 @@ class Greedy{
 			}
 		} 
 	
-		// if we've found such a subset
-		if (sum == this.n){
-			return sub; 
-		}
+		// return the residue
+		return this.n - sum; 
 		
-		// if we've not found such a subset
-		else{
-			return null; 
-		}
 		
 	}
 	
