@@ -48,13 +48,19 @@ public class DynamicSubset {
 		}
 		
 		//return the k-th item in the last row of Q
-		return Q[n-1][Long.valueOf(k).intValue() - 1];
+		return Q[n-1][Long.valueOf(k).intValue()];
 	}
 	
 	public ArrayList<Long> subSetSum() {
 		if( this.buildArray() ) {
 			System.out.println( "yes" );
-			return new ArrayList<Long>(); //temporarily empty. wil be subset
+			ArrayList<Long> subSet = new ArrayList<Long>();
+			for( int i = 0; i < k; i++ ) {
+				if( Q[n-1][i] ) {
+					subSet.add( Long.valueOf(i) );
+				}
+			}
+			return subSet;
 		}
 		else {
 			System.out.println( "no" );
@@ -69,7 +75,7 @@ public class DynamicSubset {
 		input.add(Long.valueOf(3));
 		input.add(Long.valueOf(9));
 		
-		DynamicSubset dyn = new DynamicSubset( input, 7 );
+		DynamicSubset dyn = new DynamicSubset( input, 4 );
 		
 		System.out.println( dyn.subSetSum() );
 	}
