@@ -10,7 +10,7 @@ public class DriverTimer {
     	ArrayList<Long> S = new ArrayList<Long>();
     	long low = 0;
     	long upper = 1_000_000_000_000L;
-    	for( int i = 0; i < 100; i++ ) {
+    	for( int i = 0; i < 350; i++ ) {
     		long randVal = low + (long)( rand.nextDouble()*(upper-low) );
     		S.add( randVal );
     	}
@@ -46,21 +46,21 @@ public class DriverTimer {
         System.out.println( "Exhaustive time: " + exhaustiveTime );
         
         
-        //dynamic
-        System.out.println( "---------------------Dynamic--------------------");
-        //warm-up twice
-        dynamic.subSetSum();
-        dynamic.subSetSum();
-        //time
-        startTime = System.nanoTime();
-        output = dynamic.subSetSum();
-        endTime = System.nanoTime();
-        System.out.println( "Result: " + output );
-        long time = (endTime - startTime) / 1000000;
-        //output the speedup
-        System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
+//         //dynamic
+//         System.out.println( "---------------------Dynamic--------------------");
+//         //warm-up twice
+//         dynamic.subSetSum();
+//         dynamic.subSetSum();
+//         //time
+//         startTime = System.nanoTime();
+//         boolean result = dynamic.subSetSum();
+//         endTime = System.nanoTime();
+//         System.out.println( "Result: " + result );
+//         long time = (endTime - startTime) / 1000000;
+//         //output the speedup
+//         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
         
-        
+        long time = 0; 
         //greedy
         System.out.println( "---------------------Greedy--------------------");
         //warm-up twice
@@ -68,9 +68,9 @@ public class DriverTimer {
         greedy.subsetSum();
         //time
         startTime = System.nanoTime();
-        output = greedy.subsetSum();
+        long out = greedy.subsetSum();
         endTime = System.nanoTime();
-        System.out.println( "Result: " + output );
+        System.out.println( "Result: " + out );
         time = (endTime - startTime) / 1000000;
         // output the speedup
         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
