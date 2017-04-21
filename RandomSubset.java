@@ -66,8 +66,8 @@ public class RandomSubset {
 		for (int i = 0; i < this.reps; i++) {
 			ArrayList<Long> subSet = this.genSubset();
 			long nextRes = this.findResidue(subSet);
-			// System.out.println("Subset: " + subSet);
-			// System.out.println("Residue: "+ nextRes);
+			//System.out.println("Subset: " + subSet);
+			System.out.println("Residue: "+ nextRes);
 		}
 		System.out.println("Lowest residue found: " + this.residue);
 	}
@@ -82,7 +82,7 @@ public class RandomSubset {
 		long LOWER_RANGE = 0;
 		long UPPER_RANGE = 1_000_000_000_000L;
 
-		for (int i = 0; i < 10000; i++) {
+		for (int i = 0; i < 100; i++) {
 			long randomValue = LOWER_RANGE + (long)(r.nextDouble()*(UPPER_RANGE-LOWER_RANGE));
 			set.add(randomValue);
 		}
