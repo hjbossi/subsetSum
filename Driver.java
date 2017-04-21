@@ -50,7 +50,7 @@ public class Driver {
         //time
         long startTime = System.nanoTime();
         a = exhaustive.getPowerSet(exhaustive.getSet()); 
-        long residue = exhaustive.subSetSum(a);
+        ArrayList<ArrayList<Long>> residue = exhaustive.subSetSum(a);
         long endTime = System.nanoTime();
         System.out.println( "Result: " + residue ); 
         long exhaustiveTime = (endTime - startTime) / 1000000;
@@ -65,7 +65,7 @@ public class Driver {
         dynamic.subSetSum();
         //time
         startTime = System.nanoTime();
-        output = dynamic.subSetSum();
+        long output = dynamic.subSetSum();
         endTime = System.nanoTime();
         System.out.println( "Result: " + output );
         long time = (endTime - startTime) / 1000000;
