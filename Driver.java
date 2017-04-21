@@ -39,24 +39,24 @@ public class Driver {
         AnnealingSubset annealing = new AnnealingSubset( S, k, reps );
         HillSubset hill = new HillSubset( S, k, reps );
 
-        long exhaustiveTime = 0;
+        // long exhaustiveTime = 0;
                 
-        //exhaustive
-        System.out.println( "---------------------Exhaustive--------------------");
-        //warm-up twice
-        System.out.println( "-------------Warming up---------------");
-        ArrayList<ArrayList<Long>> a = exhaustive.getPowerSet(exhaustive.getSet()); 
-        exhaustive.subSetSum(a);
-        a = exhaustive.getPowerSet(exhaustive.getSet()); 
-        exhaustive.subSetSum(a);
-        //time
-        Timer.start();
-        a = exhaustive.getPowerSet(exhaustive.getSet()); 
-        ArrayList<Long> residue = exhaustive.subSetSum(a);
-        Timer.stop();
-        System.out.println( "Result: " + residue );
-        exhaustiveTime = Timer.getRuntime();
-        System.out.println( "Exhaustive time: " + Timer.getRuntime() + "ms" );
+        // //exhaustive
+        // System.out.println( "---------------------Exhaustive--------------------");
+        // //warm-up twice
+        // System.out.println( "-------------Warming up---------------");
+        // ArrayList<ArrayList<Long>> a = exhaustive.getPowerSet(exhaustive.getSet()); 
+        // exhaustive.subSetSum(a);
+        // a = exhaustive.getPowerSet(exhaustive.getSet()); 
+        // exhaustive.subSetSum(a);
+        // //time
+        // Timer.start();
+        // a = exhaustive.getPowerSet(exhaustive.getSet()); 
+        // ArrayList<Long> residue = exhaustive.subSetSum(a);
+        // Timer.stop();
+        // System.out.println( "Result: " + residue );
+        // exhaustiveTime = Timer.getRuntime();
+        // System.out.println( "Exhaustive time: " + Timer.getRuntime() + "ms" );
         
         
         // //dynamic
@@ -80,13 +80,14 @@ public class Driver {
         System.out.println( "-------------Warming up---------------");
         greedy.subsetSum();
         greedy.subsetSum();
+        System.out.println( "-------------Running---------------");
         //time
-        Timer.start();
+        //Timer.start();
         long greedyOutput = greedy.subsetSum();
-        Timer.stop();
+        //Timer.stop();
         System.out.println( "Result: " + greedyOutput );
         // output the speedup
-        System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / Timer.getRuntime());
+        //System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / Timer.getRuntime());
         
         
         //random
@@ -96,11 +97,13 @@ public class Driver {
         random.findSets();
         random.findSets();
         //time
-        Timer.start();
-        random.findSets();
-        Timer.stop();
+        //Timer.start();
+        System.out.println( "-------------Running---------------");
+        long randOutput = random.findSets();
+        //Timer.stop();
+        System.out.println( "Result: " + randOutput );
         // output the speedup
-        System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / Timer.getRuntime());
+        //System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / Timer.getRuntime());
         
         
         //annealing
@@ -110,11 +113,13 @@ public class Driver {
         annealing.findSets();
         annealing.findSets();
         //time
-        Timer.start();
-        annealing.findSets();
-        Timer.stop();
+        //Timer.start();
+        System.out.println( "-------------Running---------------");
+        long annealOutput = annealing.findSets();
+        //Timer.stop();
+        System.out.println( "Result: " + annealOutput );
         // output the speedup
-        System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / Timer.getRuntime());
+        //System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / Timer.getRuntime());
         
         
         //hill
@@ -124,10 +129,12 @@ public class Driver {
         hill.findSets();
         hill.findSets();
         //time
-        Timer.start();
-        hill.findSets();
-        Timer.stop();
+        //Timer.start();
+        System.out.println( "-------------Running---------------");
+        long hillOutput = hill.findSets();
+        //Timer.stop();
+        System.out.println( "Result: " + hillOutput );
     	// output the speedup
-        System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / Timer.getRuntime());
+        //System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / Timer.getRuntime());
     }
 }

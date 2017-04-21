@@ -62,14 +62,14 @@ public class RandomSubset {
 	// input: null
 	//.output: null
 	// desc: executes subset process
-	public void findSets() {
+	public long findSets() {
 		for (int i = 0; i < this.reps; i++) {
 			ArrayList<Long> subSet = this.genSubset();
 			long nextRes = this.findResidue(subSet);
 			//System.out.println("Subset: " + subSet);
-			System.out.println("Residue: "+ nextRes);
+			//System.out.println("Residue: "+ nextRes);
 		}
-		System.out.println("Lowest residue found: " + this.residue);
+		return this.residue;
 	}
 
 
@@ -94,6 +94,7 @@ public class RandomSubset {
 		// System.out.println("Set: " + set);
 		// System.out.println("Target: " + target);
 
-		s.findSets();
+		long res = s.findSets();
+		System.out.println("Lowest residue found: " + res);
 	}
 }

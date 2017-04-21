@@ -104,7 +104,7 @@ public class HillSubset {
 	// input: null
 	//.output: null
 	// desc: executes subset process
-	public void findSets() {
+	public long findSets() {
 		Collections.sort(this.set);
 
 		this.currentSub = this.genSubset();
@@ -114,7 +114,7 @@ public class HillSubset {
 		}
 
 		this.residue = this.findResidue(this.currentSub);
-		System.out.println("Lowest residue found: " + this.residue);
+		return this.residue;
 	}
 
 
@@ -137,6 +137,7 @@ public class HillSubset {
 
 		HillSubset s = new HillSubset(set, target, reps);
 
-		s.findSets();
+		long res = s.findSets();
+		System.out.println("Lowest residue found: " + res);
 	}
 }

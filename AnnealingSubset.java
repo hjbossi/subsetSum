@@ -127,7 +127,7 @@ public class AnnealingSubset {
 	// input: null
 	//.output: null
 	// desc: executes subset process
-	public void findSets() {
+	public long findSets() {
 		Collections.sort(this.set);
 		//System.out.println("Sorted set: "+this.set);
 
@@ -139,7 +139,7 @@ public class AnnealingSubset {
 		}
 
 		//this.residue = this.findResidue(this.currentSub);
-		System.out.println("Lowest residue found: " + this.minRes);
+		return this.minRes;
 	}
 
 
@@ -166,6 +166,7 @@ public class AnnealingSubset {
 		System.out.println("Target: " + target);
 		System.out.println("Reps: " + reps);
 
-		s.findSets();
+		long res = s.findSets();
+		System.out.println("Lowest residue found: " + res);
 	}
 }
