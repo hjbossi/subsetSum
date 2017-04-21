@@ -30,7 +30,7 @@ public class HillSubset {
 	// input: subset
 	//.output: residue
 	// desc: finds total of subset and sets residue
-	private int findResidue(ArrayList<Long> subset) {
+	private long findResidue(ArrayList<Long> subset) {
 		long total = 0;
 		for (long i : subset) {
 			total += i;

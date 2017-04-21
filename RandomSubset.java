@@ -63,7 +63,7 @@ public class RandomSubset {
 	// input: null
 	//.output: null
 	// desc: executes subset process
-	private void findSets() {
+	public void findSets() {
 		for (int i = 0; i < this.reps; i++) {
 			ArrayList<Long> subSet = this.genSubset();
 			long nextRes = this.findResidue(subSet);

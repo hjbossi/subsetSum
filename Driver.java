@@ -50,7 +50,7 @@ public class Driver {
         //time
         long startTime = System.nanoTime();
         a = exhaustive.getPowerSet(exhaustive.getSet()); 
-        ArrayList<ArrayList<Long>> residue = exhaustive.subSetSum(a);
+        ArrayList<Long> residue = exhaustive.subSetSum(a);
         long endTime = System.nanoTime();
         System.out.println( "Result: " + residue ); 
         long exhaustiveTime = (endTime - startTime) / 1000000;
@@ -65,7 +65,7 @@ public class Driver {
         dynamic.subSetSum();
         //time
         startTime = System.nanoTime();
-        long output = dynamic.subSetSum();
+        ArrayList<Long> output = dynamic.subSetSum();
         endTime = System.nanoTime();
         System.out.println( "Result: " + output );
         long time = (endTime - startTime) / 1000000;
@@ -81,9 +81,9 @@ public class Driver {
         greedy.subsetSum();
         //time
         startTime = System.nanoTime();
-        output = greedy.subsetSum();
+        long greedyOutput = greedy.subsetSum();
         endTime = System.nanoTime();
-        System.out.println( "Result: " + output );
+        System.out.println( "Result: " + greedyOutput );
         time = (endTime - startTime) / 1000000;
         // output the speedup
         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
