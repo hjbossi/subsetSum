@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+//Dynamic Programming solution to the Subset Sum Problem
 public class DynamicSubset {
 
 	private ArrayList<Long> S;
@@ -8,22 +9,27 @@ public class DynamicSubset {
 	private boolean[][] Q;
 	private int n;
 	
+	//sets fields for the DynamicSubset Class
 	public DynamicSubset( ArrayList<Long> S, long k ) {
 		this.S = S;
 		this.k = k;
 		n = S.size();
 	}
 	
-	public boolean buildArray() {
-		//create empty 2D array Q
+	//returns true if there's a subset of S whose elements add to k
+	//returns false otherwise
+	public boolean subSetSum() {
+		//find total sum of elements in S
 		for( int i = 0; i < n; i++ ) {
 			total += S.get(i);
 		}
 		
+		//base case: total sum of elements in S < k
 		if ( k > total ) {
 			return false;
 		}
 		
+		//create empty 2D array Q
 		Q = new boolean[n][Long.valueOf(total).intValue()];
 		
 		//fill array Q
@@ -40,46 +46,25 @@ public class DynamicSubset {
 		}
 		
 		//print Q
-		String s = "";
-		for (int x = 0; x < Q.length; x++) { 
-			for (int y = 0; y < Q[x].length; y++) {
-				if( Q[x][y] ) {
-					s = "T";
-				}
-				else {
-					s = "F";
-				}
-				System.out.print( s + " ");
-			}
-			System.out.println();
-		}
+// 		String s = "";
+// 		for (int x = 0; x < Q.length; x++) { 
+// 			for (int y = 0; y < Q[x].length; y++) {
+// 				if( Q[x][y] ) {
+// 					s = "T";
+// 				}
+// 				else {
+// 					s = "F";
+// 				}
+// 				System.out.print( s + " ");
+// 			}
+// 			System.out.println();
+// 		}
 
 		//return the k-th item in the last row of Q
 		return Q[n-1][Long.valueOf(k).intValue()];
 	}
 	
-	public ArrayList<Long> subSetSum() {
-		if( this.buildArray() ) {
-			ArrayList<Long> subSet = new ArrayList<Long>();
-			System.out.println( "yes" );
-			if( S.contains( k ) ) {
-				subSet.add( k );
-				return subSet;
-			}
-
-			for( int i = 0; i < n; i++ ) {
-				if( Q[i][Long.valueOf(k).intValue()] ) {
-					subSet.add( S.get(i) );
-				}
-			}
-			return subSet;
-		}
-		else {
-			System.out.println( "no" );
-			return null;
-		}
-	}
-	
+	//tests algorithm on small set S
 	public static void main( String[] args ) {
 		ArrayList<Long> input = new ArrayList<Long>();
 		input.add(Long.valueOf(1));
