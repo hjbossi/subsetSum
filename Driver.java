@@ -24,7 +24,7 @@ public class Driver {
     		S.add( randVal );
     	}
     	
-    	long k = Double.valueOf( 25*Math.pow(10,12) ).longValue();
+    	long k =  25_000_000_000_000L;
     	int reps = 100;
     	
         // print set information
