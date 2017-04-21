@@ -29,14 +29,10 @@ public class DynamicSubset {
 		//fill array Q
 		for( int i = 0; i < n; i++ ) {
 			for( int j = 0; j < Long.valueOf(total).intValue(); j++ ) {
-				if( i <= 1 ) {
-					Q[i][j] = ( S.get(i) == j );
-				}
-				else if( i > 1 ) {
-					if( j-S.get(i) < 0 ) {
-						Q[i][j] = Q[i-1][j];
-					}
-					else {
+				Q[i][j] = ( S.get(i) == j );
+				if( (i > 1)  && (Q[i][j]==false) ) {
+					Q[i][j] = Q[i-1][j];
+					if( ( j-S.get(i) >= 0 ) && (Q[i][j]==false) ) {
 						Q[i][j] = Q[i-1][Long.valueOf(j-S.get(i)).intValue()];
 					}
 				}
