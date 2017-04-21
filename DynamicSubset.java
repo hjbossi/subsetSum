@@ -12,32 +12,51 @@ public class DynamicSubset {
 		this.S = S;
 		this.k = k;
 		n = S.size();
-		
-		for( int i = 0; i < n; i++ ) {
-			total += S.get(i);
-		}
-		
-		Q = new boolean[n][Long.valueOf(total).intValue()];
 	}
 	
 	public boolean buildArray() {
+	
+		//create empty 2D array Q
+		for( int i = 0; i < n; i++ ) {
+			total += S.get(i);
+			System.out.println( S.get(i) );
+		}
+		Q = new boolean[n][Long.valueOf(total).intValue()];
+		
+		//fill array Q
 		for( int i = 0; i < n; i++ ) {
 			for( int j = 0; j < Long.valueOf(total).intValue(); j++ ) {
-				if( i == 1 ) {
+				if( i <= 1 ) {
 					Q[i][j] = ( S.get(i) == j );
 				}
-				else {
-					Q[i][j] = Q[i-1][j]; //or S.get(i) == j or Q[i-1][j-S.get(i)]
+				else if( i > 1 ) {
+					if( j-S.get(i) < 0 ) {
+						Q[i][j] = Q[i-1][j];
+					}
+					else {
+						Q[i][j] = Q[i-1][Long.valueOf(j-S.get(i)).intValue()];
+					}
 				}
 			}
+		}
+		
+		//print Q
+		for (int i = 0; i < Q.length; i++) { 
+			for (int j = 0; j < Q[i].length; j++) {
+				System.out.print(Q[i][j] + " ");
+			}
+			System.out.println();
 		}
 		
 		return Q[n][Long.valueOf(k).intValue()];
 	}
 	
 	public ArrayList<Long> subSetSum() {
+		if( k > this.total ) {
+			return null
+		}
 		if( this.buildArray() ) {
-			return null; //temporarily null. wil be subset
+			return new ArrayList<Long>(); //temporarily null. wil be subset
 		}
 		else {
 			return null;
