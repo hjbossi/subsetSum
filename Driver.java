@@ -50,9 +50,9 @@ public class Driver {
         //time
         long startTime = System.nanoTime();
         a = exhaustive.getPowerSet(exhaustive.getSet()); 
-        ArrayList<Long> output = exhaustive.subSetSum(a);
+        long residue = exhaustive.subSetSum(a);
         long endTime = System.nanoTime();
-        System.out.println( "Result: " + output ); 
+        System.out.println( "Result: " + residue ); 
         long exhaustiveTime = (endTime - startTime) / 1000000;
         System.out.println( "Exhaustive time: " + exhaustiveTime );
         
