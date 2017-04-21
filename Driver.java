@@ -23,7 +23,7 @@ public class Driver {
     
     	//make SubsetSum finders
         ExhaustiveSearch exhaustive = new ExhaustiveSearch( S,k );
-       	DynamicSubset dynamic = new DynamicSubset( S,k );
+//        	DynamicSubset dynamic = new DynamicSubset( S,k );
         Greedy greedy = new Greedy( S,k );
         RandomSubset random = new RandomSubset( S, k, reps );
         AnnealingSubset annealing = new AnnealingSubset( S, k, reps );
@@ -31,37 +31,58 @@ public class Driver {
                 
         //exhaustive
         System.out.println( "---------------------Exhaustive--------------------");
-        long startTime = System.nanoTime();
+        //warm-up twice
         ArrayList<ArrayList<Long>> a = exhaustive.getPowerSet(exhaustive.getSet()); 
+        exhaustive.subSetSum(a);
+        a = exhaustive.getPowerSet(exhaustive.getSet()); 
+        exhaustive.subSetSum(a);
+        //time
+        long startTime = System.nanoTime();
+        a = exhaustive.getPowerSet(exhaustive.getSet()); 
         ArrayList<Long> output = exhaustive.subSetSum(a);
         long endTime = System.nanoTime();
-        System.out.println( output ); 
+        System.out.println( "Result: " + output ); 
         long exhaustiveTime = (endTime - startTime) / 1000000;
+        System.out.println( "Exhaustive time: " + exhaustiveTime );
+        
         
         //dynamic
-        System.out.println( "---------------------Dynamic--------------------");
-        startTime = System.nanoTime();
-        output = dynamic.subSetSum();
-        endTime = System.nanoTime();
-        System.out.println( output );
-        long time = (endTime - startTime) / 1000000;
-        //output the speedup
-        System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
+//         System.out.println( "---------------------Dynamic--------------------");
+//         //warm-up twice
+//         dynamic.subSetSum();
+//         dynamic.subSetSum();
+//         //time
+//         startTime = System.nanoTime();
+//         output = dynamic.subSetSum();
+//         endTime = System.nanoTime();
+//         System.out.println( "Result: " , output );
+//         long time = (endTime - startTime) / 1000000;
+//         //output the speedup
+//         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
         
         
         //greedy
         System.out.println( "---------------------Greedy--------------------");
+        //warm-up twice
+        greedy.subsetSum();
+        greedy.subsetSum();
+        //time
         startTime = System.nanoTime();
         output = greedy.subsetSum();
         endTime = System.nanoTime();
-        System.out.println( output );
-        time = (endTime - startTime) / 1000000;
+        System.out.println( "Result: " + output );
+        long time = (endTime - startTime) / 1000000;
         // output the speedup
         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
         
         
         //random
         System.out.println( "---------------------Random--------------------");
+        //warm-up twice
+        System.out.println( "-------------Warming up---------------");
+        random.findSets();
+        random.findSets();
+        //time
         startTime = System.nanoTime();
         random.findSets();
         endTime = System.nanoTime();
@@ -72,6 +93,11 @@ public class Driver {
         
         //annealing
         System.out.println( "---------------------Annealing--------------------");
+        //warm-up twice
+        System.out.println( "-------------Warming up---------------");
+        annealing.findSets();
+        annealing.findSets();
+        //time
         startTime = System.nanoTime();
         annealing.findSets();
         endTime = System.nanoTime();
@@ -82,6 +108,11 @@ public class Driver {
         
         //hill
         System.out.println( "---------------------Hill Climbing--------------------");
+        //warm-up twice
+        System.out.println( "-------------Warming up---------------");
+        hill.findSets();
+        hill.findSets();
+        //time
         startTime = System.nanoTime();
         hill.findSets();
         endTime = System.nanoTime();
