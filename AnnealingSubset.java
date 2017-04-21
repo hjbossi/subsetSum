@@ -138,7 +138,7 @@ public class AnnealingSubset {
 		}
 
 		//this.residue = this.findResidue(this.currentSub);
-		System.out.println("Smallest residue found: " + this.minRes);
+		System.out.println("Lowest residue found: " + this.minRes);
 	}
 
 

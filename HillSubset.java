@@ -113,7 +113,7 @@ public class HillSubset {
 		}
 
 		this.residue = this.findResidue(this.currentSub);
-		System.out.println("Residue found for current subset: " + this.residue);
+		System.out.println("Lowest residue found: " + this.residue);
 	}
 
 
