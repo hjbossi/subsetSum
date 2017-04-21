@@ -103,7 +103,7 @@ public class HillSubset {
 	// input: null
 	//.output: null
 	// desc: executes subset process
-	private void findSets() {
+	public void findSets() {
 		Collections.sort(this.set);
 
 		this.currentSub = this.genSubset();

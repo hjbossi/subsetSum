@@ -126,7 +126,7 @@ public class AnnealingSubset {
 	// input: null
 	//.output: null
 	// desc: executes subset process
-	private void findSets() {
+	public void findSets() {
 		Collections.sort(this.set);
 		//System.out.println("Sorted set: "+this.set);
 
