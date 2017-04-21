@@ -30,7 +30,7 @@ public class HillSubset {
 	// input: subset
 	//.output: residue
 	// desc: finds total of subset and sets residue
-	private long findResidue(ArrayList<Long> subset) {
+	private int findResidue(ArrayList<Long> subset) {
 		long total = 0;
 		for (long i : subset) {
 			total += i;
@@ -50,7 +50,7 @@ public class HillSubset {
 		ArrayList<Long> sub = new ArrayList<Long>();
 		Random r = new Random();
 		int numItems = r.nextInt(this.set.size());
-		System.out.println("Num items: "+numItems);
+		//System.out.println("Num items: "+numItems);
 		for (int i = 0; i < numItems; i++) {
 			int index = r.nextInt(this.set.size());
 			while (sub.contains(this.set.get(index))) {
@@ -95,7 +95,7 @@ public class HillSubset {
 
 		if (nRes < cRes) {
 			this.currentSub = t;
-			System.out.println("---Swapped---");
+			//System.out.println("---Swapped---");
 		}
 	}
 
@@ -103,7 +103,7 @@ public class HillSubset {
 	// input: null
 	//.output: null
 	// desc: executes subset process
-	public void findSets() {
+	private void findSets() {
 		Collections.sort(this.set);
 
 		this.currentSub = this.genSubset();

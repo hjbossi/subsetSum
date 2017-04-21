@@ -52,7 +52,7 @@ public class AnnealingSubset {
 		ArrayList<Long> sub = new ArrayList<Long>();
 		Random r = new Random();
 		int numItems = r.nextInt(this.set.size());
-		System.out.println("Num items: "+numItems);
+		//System.out.println("Num items: "+numItems);
 		for (int i = 0; i < numItems; i++) {
 			int index = r.nextInt(this.set.size());
 			while (sub.contains(this.set.get(index))) {
@@ -106,18 +106,18 @@ public class AnnealingSubset {
 
 		if (nRes < cRes) {
 			this.currentSub = t;
-			System.out.println("---Swapped---");
+			//System.out.println("---Swapped---");
 		} else {
 			//swap with probability e^-T
 			double curIt_Double = (double) curIteration;
 			double a = -1 * ( (nRes - cRes) / (10000000000L * Math.pow(0.8, ( (double) (curIt_Double/300.0) ) ) ) );
 			double power = Math.exp(a);
-			System.out.println("-T: "+a);
-			System.out.println("e^-T: "+power);
+			// System.out.println("-T: "+a);
+			// System.out.println("e^-T: "+power);
 			d = r.nextDouble();
 			if (d < power) {
 				this.currentSub = t;
-				System.out.println("---Swapped via e^-T---");
+				//System.out.println("---Swapped via e^-T---");
 			}
 		}
 	}
@@ -126,9 +126,9 @@ public class AnnealingSubset {
 	// input: null
 	//.output: null
 	// desc: executes subset process
-	public void findSets() {
+	private void findSets() {
 		Collections.sort(this.set);
-		System.out.println("Sorted set: "+this.set);
+		//System.out.println("Sorted set: "+this.set);
 
 		this.currentSub = this.genSubset();
 		this.minRes = this.findResidue(this.currentSub);
