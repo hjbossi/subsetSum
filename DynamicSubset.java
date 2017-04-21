@@ -15,12 +15,15 @@ public class DynamicSubset {
 	}
 	
 	public boolean buildArray() {
-	
 		//create empty 2D array Q
 		for( int i = 0; i < n; i++ ) {
 			total += S.get(i);
-			System.out.println( S.get(i) );
 		}
+		
+		if ( k > total ) {
+			return false;
+		}
+		
 		Q = new boolean[n][Long.valueOf(total).intValue()];
 		
 		//fill array Q
@@ -48,17 +51,16 @@ public class DynamicSubset {
 			System.out.println();
 		}
 		
-		return Q[n][Long.valueOf(k).intValue()];
+		return Q[n-1][Long.valueOf(k).intValue()];
 	}
 	
 	public ArrayList<Long> subSetSum() {
-		if( k > this.total ) {
-			return null
-		}
 		if( this.buildArray() ) {
+			System.out.println( "yes" );
 			return new ArrayList<Long>(); //temporarily null. wil be subset
 		}
 		else {
+			System.out.println( "no" );
 			return null;
 		}
 	}
