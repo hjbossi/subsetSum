@@ -1,11 +1,20 @@
+// Hannah Bossi, Sara Hoffman, Riley Karp
+// CS375 - Algorithms
+// 04-21-17
+
+// import statements
 import java.lang.Math;
 import java.util.Random;
 import java.util.ArrayList;
 
+// class definition
 public class Driver {
+    // main method
     public static void main(String[] args) throws Exception {
     
+        // create random variable
     	Random rand = new Random();
+
     	//make subset
     	ArrayList<Long> S = new ArrayList<Long>();
     	long low = 0;
@@ -18,6 +27,7 @@ public class Driver {
     	long k = Double.valueOf( 25*Math.pow(10,12) ).longValue();
     	int reps = 100;
     	
+        // print set information
     	System.out.println("Set: " + S);
         System.out.println("Sum: " + k);
     
@@ -32,6 +42,7 @@ public class Driver {
         //exhaustive
         System.out.println( "---------------------Exhaustive--------------------");
         //warm-up twice
+        System.out.println( "-------------Warming up---------------");
         ArrayList<ArrayList<Long>> a = exhaustive.getPowerSet(exhaustive.getSet()); 
         exhaustive.subSetSum(a);
         a = exhaustive.getPowerSet(exhaustive.getSet()); 
@@ -49,6 +60,7 @@ public class Driver {
         //dynamic
         System.out.println( "---------------------Dynamic--------------------");
         //warm-up twice
+        System.out.println( "-------------Warming up---------------");
         dynamic.subSetSum();
         dynamic.subSetSum();
         //time
@@ -64,6 +76,7 @@ public class Driver {
         //greedy
         System.out.println( "---------------------Greedy--------------------");
         //warm-up twice
+        System.out.println( "-------------Warming up---------------");
         greedy.subsetSum();
         greedy.subsetSum();
         //time
