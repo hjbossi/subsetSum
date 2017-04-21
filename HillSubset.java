@@ -48,15 +48,16 @@ public class HillSubset {
 	// desc: finds random subset of set
 	private ArrayList<Long> genSubset() {
 		ArrayList<Long> sub = new ArrayList<Long>();
+		ArrayList<Long> setClone = (ArrayList<Long>) this.set.clone();
+
 		Random r = new Random();
-		int numItems = r.nextInt(this.set.size());
+		int numItems = r.nextInt(setClone.size());
 		//System.out.println("Num items: "+numItems);
+
 		for (int i = 0; i < numItems; i++) {
-			int index = r.nextInt(this.set.size());
-			while (sub.contains(this.set.get(index))) {
-				index = r.nextInt(this.set.size());
-			}
-			sub.add(this.set.get(index));
+			int index = r.nextInt(setClone.size());
+			sub.add(setClone.get(index));
+			setClone.remove(index);
 		}
 		return sub;
 	}
