@@ -1,6 +1,7 @@
 import java.lang.Math;
 import java.util.Random;
 import java.util.ArrayList;
+import java.lang.Long;
 
 public class DriverTimer {
     public static void main(String[] args) throws Exception {
@@ -8,11 +9,15 @@ public class DriverTimer {
     	Random rand = new Random();
     	//make subset
     	ArrayList<Long> S = new ArrayList<Long>();
+    	ArrayList<Long> D = new ArrayList<Long>();
     	long low = 0;
     	long upper = 1_000_000_000_000L;
-    	for( int i = 0; i < 350; i++ ) {
+    	long upper2 = 500_000L; 
+    	for( int i = 0; i < 300; i++ ) {
     		long randVal = low + (long)( rand.nextDouble()*(upper-low) );
+    		long randVal2 = low + (long)( rand.nextDouble()*(upper2-low) );
     		S.add( randVal );
+    		D.add(randVal2); 
     	}
     	
     	long k = Double.valueOf( 25*Math.pow(10,12) ).longValue();
@@ -23,7 +28,7 @@ public class DriverTimer {
     
     	//make SubsetSum finders
         ExhaustiveSearch exhaustive = new ExhaustiveSearch( S,k );
-       	DynamicSubset dynamic = new DynamicSubset( S,k );
+       	DynamicSubset dynamic = new DynamicSubset( D,k );
         Greedy greedy = new Greedy( S,k );
         RandomSubset random = new RandomSubset( S, k, reps );
         AnnealingSubset annealing = new AnnealingSubset( S, k, reps );
@@ -42,25 +47,27 @@ public class DriverTimer {
         ArrayList<Long> output = exhaustive.subSetSum(a);
         long endTime = System.nanoTime();
         System.out.println( "Result: " + output ); 
-        long exhaustiveTime = (endTime - startTime) / 1000000;
+        long exhaustiveTime = (endTime - startTime);
         System.out.println( "Exhaustive time: " + exhaustiveTime );
         
         
-//         //dynamic
-//         System.out.println( "---------------------Dynamic--------------------");
-//         //warm-up twice
-//         dynamic.subSetSum();
-//         dynamic.subSetSum();
-//         //time
-//         startTime = System.nanoTime();
-//         boolean result = dynamic.subSetSum();
-//         endTime = System.nanoTime();
-//         System.out.println( "Result: " + result );
-//         long time = (endTime - startTime) / 1000000;
-//         //output the speedup
-//         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
+        //dynamic
+        System.out.println( "---------------------Dynamic--------------------");
+        //warm-up twice
+        dynamic.subSetSum();
+        dynamic.subSetSum();
+        //time
+        startTime = System.nanoTime();
+        boolean result = dynamic.subSetSum();
+        endTime = System.nanoTime();
+        System.out.println( "Result: " + result );
+        long time = (endTime - startTime);
+        //output the speedup
+        Long num = new Long(time); 
+        System.out.println("Run Time: " + num.toString()); 
+        System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
         
-        long time = 0; 
+     
         //greedy
         System.out.println( "---------------------Greedy--------------------");
         //warm-up twice
@@ -71,7 +78,9 @@ public class DriverTimer {
         long out = greedy.subsetSum();
         endTime = System.nanoTime();
         System.out.println( "Result: " + out );
-        time = (endTime - startTime) / 1000000;
+        time = (endTime - startTime);
+        num = new Long(time); 
+        System.out.println("Run Time: " + num.toString()); 
         // output the speedup
         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
         
@@ -86,7 +95,9 @@ public class DriverTimer {
         startTime = System.nanoTime();
         random.findSets();
         endTime = System.nanoTime();
-        time = (endTime - startTime) / 1000000;
+        time = (endTime - startTime);
+        num = new Long(time); 
+        System.out.println("Run Time: " + num.toString()); 
         // output the speedup
         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
         
@@ -101,7 +112,9 @@ public class DriverTimer {
         startTime = System.nanoTime();
         annealing.findSets();
         endTime = System.nanoTime();
-        time = (endTime - startTime) / 1000000;
+        time = (endTime - startTime);
+        num = new Long(time); 
+        System.out.println("Run Time: " + num.toString()); 
         // output the speedup
         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
         
@@ -116,7 +129,9 @@ public class DriverTimer {
         startTime = System.nanoTime();
         hill.findSets();
         endTime = System.nanoTime();
-        time = (endTime - startTime) / 1000000;
+        time = (endTime - startTime);
+        num = new Long(time); 
+        System.out.println("Run Time: " + num.toString()); 
     	// output the speedup
         System.out.printf("Speed-up: %.2f\n", exhaustiveTime / 1.0 / time);
     }
